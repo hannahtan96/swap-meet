@@ -8,6 +8,8 @@ class Item:
     def __str__(self):
         return "Hello World!"
 
+######################################## WAVE 5 #########################################
+
     def condition_description(self):
         if self.condition == 5:
             return "mint"

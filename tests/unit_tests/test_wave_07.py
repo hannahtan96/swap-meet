@@ -157,5 +157,3 @@ def test_swap_newest_no_other_inventory_is_false():
     assert item_a in tai.inventory
     assert item_b in tai.inventory
     assert item_c in tai.inventory
-
-
