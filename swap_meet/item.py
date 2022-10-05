@@ -1,3 +1,12 @@
+CONDITION_DESC = {
+    0: "you might as well buy a new one",
+    1: "barely hanging on",
+    2: "pretty used",
+    3: "kinda used",
+    4: "newish",
+    5: "mint"
+}
+
 class Item:
     
     def __init__(self, category='', condition=0, age=0):
@@ -11,15 +20,4 @@ class Item:
 ######################################## WAVE 5 #########################################
 
     def condition_description(self):
-        if self.condition == 5:
-            return "mint"
-        elif self.condition == 4:
-            return "newish"
-        elif self.condition == 3:
-            return "kinda used"
-        elif self.condition == 2:
-            return "pretty used"
-        elif self.condition == 1:
-            return "barely hanging on"
-        elif self.condition == 0:
-            return "you might as well buy a new one"
+        return CONDITION_DESC[int(self.condition)]
