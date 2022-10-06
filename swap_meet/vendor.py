@@ -80,5 +80,3 @@ class Vendor:
         my_offer =  self.get_newest()
         their_offer = other.get_newest()
         return self.swap_items(other, my_offer, their_offer)
-
-
