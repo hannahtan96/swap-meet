@@ -77,7 +77,7 @@ class Vendor:
             return None
 
     def swap_by_newest(self, other):
-        # my_offer =  self.get_newest()
-        # their_offer = other.get_newest()
-        # return self.swap_items(other, my_offer, their_offer)
-        return self.swap_by(other, Vendor().get_newest())
+        my_offer =  self.get_newest()
+        their_offer = other.get_newest()
+        return self.swap_items(other, my_offer, their_offer)
+
