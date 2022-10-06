@@ -4,10 +4,11 @@ class Vendor:
 
 ######################################## WAVE 1 #########################################
     
-    def __init__(self, inventory=None):
+    def __init__(self, inventory=None, modifier=None):
         if inventory is None:
             inventory = []
         self.inventory = inventory
+        self.modifier = modifier
 
 
     def add(self, item):
@@ -54,7 +55,7 @@ class Vendor:
 
     def get_best_by_category(self, category):
         try:
-            best_item = max([item for item in self.inventory if item.category == category], key=lambda item:item.condition)
+            best_item = max(self.get_by_category(category), key=lambda item:item.condition)
             return best_item
         except:
             return None
@@ -75,8 +76,9 @@ class Vendor:
         except:
             return None
 
-
     def swap_by_newest(self, other):
-        my_offer =  self.get_newest()
-        their_offer = other.get_newest()
-        return self.swap_items(other, my_offer, their_offer)
+        # my_offer =  self.get_newest()
+        # their_offer = other.get_newest()
+        # return self.swap_items(other, my_offer, their_offer)
+        return self.swap_by(other, Vendor().get_newest())
+
