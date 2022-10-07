@@ -71,7 +71,7 @@ class Vendor:
 
     def get_newest(self):
         try:
-            newest_item = min([item for item in self.inventory], key=lambda item:item.age)
+            newest_item = min(self.inventory, key=lambda item:item.age)
             return newest_item
         except:
             return None
