@@ -1,14 +1,14 @@
+import re
 from swap_meet.item import Item
 
 class Vendor:
 
 ######################################## WAVE 1 #########################################
     
-    def __init__(self, inventory=None, modifier=None):
+    def __init__(self, inventory=None):
         if inventory is None:
             inventory = []
         self.inventory = inventory
-        self.modifier = modifier
 
 
     def add(self, item):
@@ -27,7 +27,7 @@ class Vendor:
 ######################################## WAVE 2 #########################################
 
     def get_by_category(self, category):
-        category_items = [item for item in self.inventory if item.category == category]
+        category_items = [item for item in self.inventory if re.match(category, item.category)]
         return category_items
 
 
@@ -62,22 +62,25 @@ class Vendor:
 
 
     def swap_best_by_category(self, other, my_priority, their_priority):
-        my_offer =  self.get_best_by_category(their_priority)
-        their_offer = other.get_best_by_category(my_priority)
-        return self.swap_items(other, my_offer, their_offer)
+        return swap_by(Vendor.get_best_by_category, self, other, my_priority, their_priority)
 
 
-######################################## WAVE 7 #########################################
+####################################### WAVE 7 #########################################
 
-    def get_newest(self):
+    def get_newest(self, category=None):
+        if not category:
+            category = ".*"
         try:
-            newest_item = min([item for item in self.inventory], key=lambda item:item.age)
+            newest_item = min(self.get_by_category(category), key=lambda item: item.age)
             return newest_item
         except:
             return None
 
     def swap_by_newest(self, other):
-        my_offer =  self.get_newest()
-        their_offer = other.get_newest()
-        return self.swap_items(other, my_offer, their_offer)
+        return swap_by(Vendor.get_newest, self, other)
+
+def swap_by(method, self, other, my_priority=None, their_priority=None):
+    my_offer = method(self, their_priority)
+    their_offer = method(other, my_priority)
+    return self.swap_items(other, my_offer, their_offer)
 
