@@ -68,7 +68,7 @@ class Vendor:
 ####################################### WAVE 7 #########################################
 
     def get_newest(self, category=None):
-        if not category:
+        if category is None:
             category = ".*"
         try:
             newest_item = min(self.get_by_category(category), key=lambda item: item.age)
@@ -78,6 +78,7 @@ class Vendor:
 
     def swap_by_newest(self, other):
         return swap_by(Vendor.get_newest, self, other)
+
 
 def swap_by(method, self, other, my_priority=None, their_priority=None):
     my_offer = method(self, their_priority)
